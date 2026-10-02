@@ -55,6 +55,8 @@ func Main(version string) {
 
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()
+	// After the first signal restore default handling, so a second Ctrl+C kills the process even if something hangs.
+	context.AfterFunc(ctx, stop)
 	ctx = log.WithContext(ctx)
 
 	if err := cli.Run(ctx); err != nil {
