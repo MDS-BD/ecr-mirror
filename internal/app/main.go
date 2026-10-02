@@ -117,17 +117,6 @@ func (c *CLI) Run(ctx context.Context) error {
 		}
 	}
 
-	updates := make(chan v1.Update, 16)
-	pusher, err := remote.NewPusher(append(opts, remote.WithProgress(updates))...)
-	if err != nil {
-		return err
-	}
-	done := make(chan struct{})
-	go func() {
-		defer close(done)
-		logProgress(ctx, updates)
-	}()
-
 	var target remote.Taggable = desc
 	if platform != nil {
 		// With an explicit platform push only that image, not the whole index.
@@ -135,7 +124,15 @@ func (c *CLI) Run(ctx context.Context) error {
 			return fmt.Errorf("select platform %s: %w", c.Platform, err)
 		}
 	}
-	err = pusher.Push(ctx, dst.Ref, target)
+
+	// remote.Push closes updates when done; the Pusher.Push method does not, which would block logProgress forever.
+	updates := make(chan v1.Update, 16)
+	done := make(chan struct{})
+	go func() {
+		defer close(done)
+		logProgress(ctx, updates)
+	}()
+	err = remote.Push(dst.Ref, target, append(opts, remote.WithProgress(updates))...)
 	<-done
 	if err != nil {
 		return fmt.Errorf("push %s: %w", dst.Ref, err)
