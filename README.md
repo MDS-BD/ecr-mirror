@@ -54,3 +54,16 @@ go test ./... -cover
 
 Same as [aws-tunnel](https://github.com/MDS-BD/aws-tunnel#release): push a `v*` tag; GoReleaser builds, signs,
 publishes and pushes the cask to the tap. The same repository secrets are needed.
+
+## License and release compliance
+
+The project is licensed under the MIT License; third-party licenses and notices are retained in `LICENSES/third-party/`.
+Each release archive includes this repository's `LICENSE` and the complete notices bundle. The inventory and source
+provenance are recorded in `LICENSES/README.txt`; the bundle covers the 31 linked Go modules at their pinned versions,
+the applicable nested license texts/notices, and Go 1.27.3 runtime/vendor licenses.
+
+Release builds require Go 1.27.3 exactly. CI installs that version, and GoReleaser checks the active compiler before
+building. Keep the exact dependency versions committed in `go.mod`/`go.sum`: release compilation sets
+`GOFLAGS=-mod=readonly` and `GOTOOLCHAIN=local`, so it neither edits module files nor silently downloads another Go
+toolchain. To update dependencies or Go, refresh the runtime inventory and corresponding exact-version licenses before
+changing the pinned release configuration.
