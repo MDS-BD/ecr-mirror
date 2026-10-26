@@ -2,16 +2,17 @@ ecr-mirror third-party notices
 ================================
 
 This bundle applies to the ecr-mirror release binary built from ./cmd for
-Darwin/Linux amd64/arm64, CGO_ENABLED=0, with Go 1.27.3. Runtime module
-versions were inventoried from the exact release dependency closure using
-`go list -mod=readonly -deps -json ./cmd` for all four target pairs and
-normalized to module/version pairs. This versioned inventory and target assembly
-review were established 2026-10-26. Exact-version source retrieval references
-follow in this file:
-Exact-version module source distributions correspond to go.mod/go.sum; the
-Go toolchain source is the Go 1.27.3 distribution. The included license and
-notice files are verbatim copies, not a replacement license or assertion of
-third-party ownership. Dependencies remain under their respective terms.
+Darwin/Linux amd64/arm64, CGO_ENABLED=0. The included Go 1.27.3 toolchain and
+vendor license files are a snapshot from the prior audit, established
+2026-10-26; they do not pin or promise the compiler used for future releases.
+Before release, rerun the audit procedure in the tap's PUBLISHING.md and
+refresh the toolchain/vendor inventory and notices for the actual release
+compiler. Runtime module versions were inventoried from the release dependency
+closure using `go list -mod=readonly -deps -json ./cmd` for all four target
+pairs and normalized to module/version pairs. Exact-version source retrieval
+references follow in this file. The included license and notice files are
+verbatim copies, not a replacement license or assertion of third-party
+ownership. Dependencies remain under their respective terms.
 
 Exact module-version-to-license-file mapping, including retrieval source URLs,
 is in `manifest.tsv`. File contents are copied verbatim from those tagged
@@ -54,14 +55,16 @@ klauspost/compress root LICENSE. The latter expressly includes its nested
 snapref/S2 BSD terms and xxhash MIT terms. No extra license has been
 invented; the full source license text is kept intact.
 
-The Go 1.27.3 distribution LICENSE covers Go runtime/standard-library code.
-The Go distribution's vendored golang.org/x/crypto, x/net, x/sys, and x/text
-source licenses are included separately because portions are linked into the
-program. Go 1.27.3 is both the release compiler and the compiler used to
-establish this runtime/vendor inventory.
+The included Go 1.27.3 distribution LICENSE covers the Go runtime and
+standard-library code in that prior audit snapshot. The distribution's
+vendored golang.org/x/crypto, x/net, x/sys, and x/text source licenses are
+included separately because portions were linked into the audited program.
+They are historical inventory evidence; refresh them for the actual compiler
+before release.
 
 Audit source and retrieval references for exceptional attribution:
-- Go: https://go.dev/dl/ (go1.27.3 source/distribution LICENSE and src/vendor)
+- Go: https://go.dev/dl/ (go1.27.3 source/distribution LICENSE and src/vendor
+  for the prior audit snapshot; refresh using the actual compiler)
 - AWS SDK: https://github.com/aws/aws-sdk-go-v2/tree/v1.47.1 and version-tagged
   submodule releases listed above
 - smithy-go: https://github.com/aws/smithy-go/tree/v1.28.1

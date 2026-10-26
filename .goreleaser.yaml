@@ -5,7 +5,6 @@ project_name: ecr-mirror
 
 before:
   hooks:
-    - sh -c 'test "$(go env GOVERSION)" = go1.27.3'
     - go test -mod=readonly ./...
 
 builds:
@@ -14,7 +13,6 @@ builds:
     binary: ecr-mirror
     env:
       - CGO_ENABLED=0
-      - GOTOOLCHAIN=local
       - GOFLAGS=-mod=readonly
     goos:
       - darwin

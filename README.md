@@ -58,12 +58,7 @@ publishes and pushes the cask to the tap. The same repository secrets are needed
 ## License and release compliance
 
 The project is licensed under the MIT License; third-party licenses and notices are retained in `LICENSES/third-party/`.
-Each release archive includes this repository's `LICENSE` and the complete notices bundle. The inventory and source
-provenance are recorded in `LICENSES/README.txt`; the bundle covers the 31 linked Go modules at their pinned versions,
-the applicable nested license texts/notices, and Go 1.27.3 runtime/vendor licenses.
-
-Release builds require Go 1.27.3 exactly. CI installs that version, and GoReleaser checks the active compiler before
-building. Keep the exact dependency versions committed in `go.mod`/`go.sum`: release compilation sets
-`GOFLAGS=-mod=readonly` and `GOTOOLCHAIN=local`, so it neither edits module files nor silently downloads another Go
-toolchain. To update dependencies or Go, refresh the runtime inventory and corresponding exact-version licenses before
-changing the pinned release configuration.
+The inventory and source provenance are recorded in `LICENSES/README.txt`; it includes third-party license texts and
+notices for the audited runtime dependencies and Go toolchain snapshot. For the copy/paste procedure to rerun the
+license audit, record the actual compiler, and refresh licenses before release, see the tap's
+[license audit instructions](https://github.com/MDS-BD/homebrew-tools/blob/main/PUBLISHING.md#rerunning-the-license-audit).
