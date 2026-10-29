@@ -20,11 +20,12 @@ credential chain is used. Each side's region comes from its registry host. Run `
 
 ## Install
 
+The tap must be public for anonymous Homebrew installation.
+
 ```sh
-export HOMEBREW_GITHUB_API_TOKEN=$(gh auth token)   # any token able to read MDS-BD repos
-brew tap MDS-BD/tools git@github.com:MDS-BD/homebrew-tools.git
+brew tap MDS-BD/tools https://github.com/MDS-BD/homebrew-tools
 brew install --cask mds-bd/tools/ecr-mirror
-```
+brew upgrade --cask mds-bd/tools/ecr-mirror
 
 ## Permissions
 
