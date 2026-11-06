@@ -22,10 +22,11 @@ credential chain is used. Each side's region comes from its registry host. Run `
 
 The tap must be public for anonymous Homebrew installation.
 
-````sh
+```sh
 brew tap MDS-BD/tools https://github.com/MDS-BD/homebrew-tools
 brew install --cask mds-bd/tools/ecr-mirror
 brew upgrade --cask mds-bd/tools/ecr-mirror
+```
 
 ## Permissions
 
@@ -49,7 +50,7 @@ brew upgrade --cask mds-bd/tools/ecr-mirror
 
 ```sh
 go test ./... -cover
-````
+```
 
 ## Release
 
