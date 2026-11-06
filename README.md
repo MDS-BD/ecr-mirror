@@ -26,6 +26,7 @@ The tap must be public for anonymous Homebrew installation.
 brew tap MDS-BD/tools https://github.com/MDS-BD/homebrew-tools
 brew install --cask mds-bd/tools/ecr-mirror
 brew upgrade --cask mds-bd/tools/ecr-mirror
+```
 
 ## Permissions
 
@@ -55,6 +56,7 @@ go test ./... -cover
 
 Same as [aws-tunnel](https://github.com/MDS-BD/aws-tunnel#release): push a `v*` tag; GoReleaser builds, signs,
 publishes and pushes the cask to the tap. The same repository secrets are needed.
+GoReleaser 2.19 or later is required for the Homebrew cask's `install_steps` hook.
 
 ## License and release compliance
 
